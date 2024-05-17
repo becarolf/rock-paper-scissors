@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+
+  <script>
+    //get the players choice
+    // generate a random choice
+    // compare the choice to determine a winner
+    const possibleChoices = ["rock", "paper", "scissors"];
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function getComputerChoice() {
+
+      const randomIndex = Math.floor(Math.random() * possibleChoices.length);
+      return possibleChoices[randomIndex];
+    }
+
+    // logic to get the human choice
+    function getHumanChoice() {
+      const humanChoice = prompt("Enter your choice (rock, paper or scissors):").toLowerCase();
+      if (!possibleChoices.includes(humanChoice)) {
+        alert("Please choose between: rock, paper or scissors");
+        getHumanChoice();
+      }
+
+      return humanChoice;
+    }
+
+    function playRound(humanChoice, computerChoice) {
+      if (humanChoice === computerChoice) {
+        alert("It's a draw!");
+      } else if (humanChoice === "rock" && computerChoice === "paper") {
+        computerScore++;
+        alert("Computer chose 'paper'. Computer won!");
+      } else if (humanChoice === "rock" && computerChoice === "scissors") {
+        humanScore++;
+        alert("Computer chose 'scissors'. You won!");
+      } else if (humanChoice === "paper" && computerChoice === "rock") {
+          humanScore++;
+          alert("Computer chose 'rock'. You won!");
+      } else if (humanChoice === "paper" && computerChoice === "scissors") {
+          computerScore++;
+          alert("Computer chose 'scissors'. Computer won!");
+      } else if (humanChoice === "scissors" && computerChoice === "paper") {
+          humanScore++;
+          alert("Computer chose 'paper'. You won!");
+      } else if (humanChoice === "scissors" && computerChoice === "rock") {
+          computerScore++;
+          alert("Computer chose 'rock'. Computer won!");
+      }
+      // displaying the current score
+      alert(`Current score - You: ${humanScore}, Computer: ${computerScore}`);
+    }
+
+    function playGame() {
+      for (let i = 0; i < 5; i++) {
+        playRound(getHumanChoice(), getComputerChoice());
+      }
+
+      // determining a winner
+      if(humanScore > computerScore) {
+        alert(`Congrats, after 5 rounds, you are the winner! \nFinal Score - You: ${humanScore}, Computer: ${computerScore}`);
+      } else if (computerScore > humanScore) {
+        alert(`Congrats, after 5 rounds, the computer is the winner! \nFinal Score - You: ${humanScore}, Computer: ${computerScore}`);
+      } else {
+        alert(`It's a tie! \nFinal Score - You: ${humanScore}, Computer: ${computerScore}`)
+      }
+    }
+
+
+
+    playGame();
+
+  </script>
+
+</body>
+</html>
